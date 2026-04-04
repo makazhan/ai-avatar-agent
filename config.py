@@ -20,7 +20,7 @@ VOICE_ID = os.getenv("VOICE_ID", "")
 VOICE_SAMPLE_PATH = os.getenv("VOICE_SAMPLE_PATH", "voice/my_voice_sample.wav")
 
 # Avatar settings
-AVATAR_PHOTO_URL = os.getenv("AVATAR_PHOTO_URL", "")
+AVATAR_PHOTO_PATH = os.getenv("AVATAR_PHOTO_PATH", "avatar/my_photo.jpg")
 
 # Cache
 CACHE_DIR = os.getenv("CACHE_DIR", ".cache")
