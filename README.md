@@ -42,6 +42,18 @@
 
 ## Инструкция запуска
 
+Проект использует [uv](https://docs.astral.sh/uv/) как пакетный менеджер. Если у вас нет `uv`, см. шаг 0 ниже или раздел «Альтернатива: установка через pip».
+
+### 0. Установка uv
+
+```bash
+# Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# Linux / macOS
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
 ### 1. Установка зависимостей
 
 ```bash
@@ -60,7 +72,7 @@ cp .env.example .env
 - `OPENAI_API_KEY` — получить на [platform.openai.com](https://platform.openai.com)
 - `FAL_KEY` — получить на [fal.ai](https://fal.ai)
 
-### 3. Клонирование голоса (одноразово, ~$0.50)
+### 3. Клонирование голоса (одноразово, ~$0.50-1.70)
 
 Поместите аудиозапись вашего голоса (10+ секунд) в `voice/my_voice_sample.wav`, затем:
 
@@ -83,6 +95,25 @@ uv run python app.py
 ```
 
 Откроется на http://localhost:7860.
+
+### Альтернатива: установка через pip (НЕ ТЕСТИРОВАЛАСЬ!)
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate        # Windows
+# source .venv/bin/activate   # Linux/macOS
+pip install -r requirements.txt
+playwright install chromium
+```
+
+Далее везде заменяйте `uv run python` на `python`:
+
+```bash
+python voice/clone.py         # клонирование голоса
+python app.py                 # запуск приложения
+```
+
+> **Примечание:** MCP-серверы запускаются через `uv run python` внутри `agent/pipeline.py`. Если `uv` не установлен, установите его (`pip install uv`) либо измените команды запуска серверов в `pipeline.py:52-60` с `"uv", ["run", "python", ...]` на `"python", [...]`.
 
 ### Режим разработки (без затрат на TTS/видео)
 
