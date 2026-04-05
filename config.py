@@ -3,16 +3,22 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Mode flags
+# Mode flags — USE_MOCKS controls all components globally;
+# per-component overrides allow testing expensive parts separately.
 USE_MOCKS = os.getenv("USE_MOCKS", "true").lower() == "true"
+MOCK_TTS = os.getenv("MOCK_TTS", str(USE_MOCKS)).lower() == "true"
+MOCK_VIDEO = os.getenv("MOCK_VIDEO", str(USE_MOCKS)).lower() == "true"
+MOCK_ASR = os.getenv("MOCK_ASR", str(USE_MOCKS)).lower() == "true"
 
 # API Keys
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 FAL_KEY = os.getenv("FAL_KEY", "")
+if FAL_KEY:
+    os.environ["FAL_KEY"] = FAL_KEY
 
 # LLM settings
 LLM_MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
-ASR_MODEL = os.getenv("ASR_MODEL", "gpt-5.4-mini")
+ASR_MODEL = os.getenv("ASR_MODEL", "gpt-4o-mini-transcribe")
 VISION_DETAIL = os.getenv("VISION_DETAIL", "low")
 
 # Voice settings
